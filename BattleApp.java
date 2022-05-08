@@ -9,15 +9,15 @@ public class BattleApp{
 			} catch (InterruptedException e) {
 			}
 			if(h1.actGage()) ((Hero)h1).act(e1);
-			if(!e1.isAlive) break;
-			if(e1.actGage()) e1.attack(h1);
-			if(!h1.isAlive) break;
-		}
-		if(!h1.isAlive){
-			System.out.println("敗北");
-		}
-		if(!e1.isAlive){
+			if(!e1.isAlive){
 			System.out.println("勝利！！");
+				break;
+			}
+			if(e1.actGage()) e1.attack(h1);
+			if(!h1.isAlive){
+			System.out.println("敗北");
+				break;
+			}
 		}
 	}
 }
