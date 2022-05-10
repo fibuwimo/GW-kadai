@@ -1,6 +1,6 @@
 public abstract class Character{
 	String name;
-	int hp;
+	protected int hp;
 	int atk;
 	int agi;
 	int count=0;
