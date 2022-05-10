@@ -14,6 +14,15 @@ public class Hero extends Character{
 		"戻る",
 	};
 	int[] magicGages={2,2,9,4,3,2};
+	String[] magicsinfo={
+		"(詠唱:"+magicGages[0]+",攻撃魔法)",
+		"(詠唱:"+magicGages[1]+",回復魔法)",
+		"(詠唱:"+magicGages[2]+",攻撃魔法)",
+		"(詠唱:"+magicGages[3]+",行動速度↑バフ)",
+		"(詠唱:"+magicGages[4]+",詠唱速度↑バフ)",
+		"(詠唱:"+magicGages[5]+",継続回復↑バフ)",
+		"",
+	};
 	int magicNum =0;
 	int magicGage=0;
 	int agiAdd=0;
@@ -28,14 +37,15 @@ public class Hero extends Character{
 	boolean actGage(){
 		if(this.magicNum!=0){
 			this.count +=1+this.spellAdd;
-			System.out.print(this.name+"HP:"+this.hp+",spell:");
+			System.out.print(this.name+"HP:"+this.hp+"【spell:");
 			for(int i=0;i<magicGage;i++){
 				System.out.print(i<this.count?"★":"☆");
 			}
+		System.out.print("(");
 			System.out.print(agiAdd==1?"ヘ":"");
 			System.out.print(spellAdd==1?"詠":"");
 			System.out.print(hotAdd>0?"リ":"");
-			System.out.println();
+			System.out.println(")】");
 			if(this.count>=magicGage){
 				this.count=0;
 				return true;
@@ -44,14 +54,15 @@ public class Hero extends Character{
 			}
 		}
 		this.count +=this.agi+this.agiAdd;
-		System.out.print(this.name+"HP:"+this.hp+",act:");
+		System.out.print(this.name+"HP:"+this.hp+"【act:");
 		for(int i=0;i<GAGE;i++){
 			System.out.print(i<this.count?"◆":"◇");
 		}
+		System.out.print("(");
 		System.out.print(agiAdd==1?"ヘ":"");
 		System.out.print(spellAdd==1?"詠":"");
 		System.out.print(hotAdd>0?"リ":"");
-		System.out.println();
+		System.out.println(")】");
 		if(this.count>=GAGE){
 			this.count=0;
 			return true;
@@ -89,6 +100,7 @@ public class Hero extends Character{
 			this.magicNum=0;
 			return;
 		}
+
 		for(int i=0;i<acts.length;i++){
 			System.out.printf("%d:%s%n",i,acts[i]);
 		}
@@ -108,7 +120,7 @@ public class Hero extends Character{
 	}
 	void magic(Character c){
 		for(int i=0;i<magics.length;i++){
-			System.out.printf("%d:%s%n",i,magics[i]);
+			System.out.printf("%d:%s  %s%n",i,magics[i],magicsinfo[i]);
 		}
 		int idx;
 		do{
@@ -123,6 +135,7 @@ public class Hero extends Character{
 		this.magicNum=idx+1;
 		this.magicGage=this.magicGages[idx];
 	}
+
 	void fire(Character c){
 		System.out.printf("%sの%s！%sに%dのダメージを与えた！%n",this.name,this.magics[0],c.name,this.atk*3);
 		c.setHp(c.getHp()-this.atk*3);
@@ -138,17 +151,17 @@ public class Hero extends Character{
 	void haste(Character c){
 		System.out.printf("%sの%s！%sはヘイスト状態になった！%n",this.name,this.magics[3],this.name);
 		this.agiAdd=1;
-		this.agiAddCount=8;
+		this.agiAddCount=10;
 	}
 	void spellHaste(Character c){
 		System.out.printf("%sの%s！%sは詠唱短縮状態になった！%n",this.name,this.magics[4],this.name);
 		this.spellAdd=1;
-		this.spellAddCount=8;
+		this.spellAddCount=10;
 	}
 	void regen(Character c){
 		System.out.printf("%sの%s！%sはリジェネ状態になった！%n",this.name,this.magics[5],this.name);
 		this.hotAdd=10;
-		this.hotAddCount=8;
+		this.hotAddCount=10;
 	}
 	void buffCount(){
 		if(agiAddCount>0) agiAddCount--;
