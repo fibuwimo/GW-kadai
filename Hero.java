@@ -47,7 +47,7 @@ public class Hero extends Character{
 			System.out.print(spellAdd==1?"詠":"");
 			System.out.print(hotAdd>0?"リ":"");
 			System.out.println(")】");
-			if(this.count>=magicGage){　//詠唱カウントが魔法の詠唱必要値に達したなら
+			if(this.count>=magicGage){//詠唱カウントが魔法の詠唱必要値に達したなら
 				this.count=0;
 				return true;
 			}else{
@@ -73,13 +73,13 @@ public class Hero extends Character{
 		}
 	}
 
-	void act(Character c){　//ゲージ満了後にAppから呼ばれる
-		this.buffCount();　//バフ等ターンごとの処理
-		this.act1(c);　//下記のact処理を呼ぶ
+	void act(Character c){//ゲージ満了後にAppから呼ばれる
+		this.buffCount();//バフ等ターンごとの処理
+		this.act1(c);//下記のact処理を呼ぶ
 	}
 	void act1(Character c){
-		if(this.magicNum!=0){ //魔法詠唱中であったなら
-			switch(this.magicNum){　//詠唱中の魔法によってスイッチ
+		if(this.magicNum!=0){//魔法詠唱中であったなら
+			switch(this.magicNum){//詠唱中の魔法によってスイッチ
 				case 1:
 					this.fire(c);
 					break;
@@ -99,14 +99,14 @@ public class Hero extends Character{
 					this.regen(c);
 					break;
 			}
-			this.magicNum=0;　//魔法詠唱状態解除
+			this.magicNum=0;//魔法詠唱状態解除
 			return;
 		}
 		//魔法詠唱中でなかったなら
 		for(int i=0;i<acts.length;i++){
 			System.out.printf("%d:%s%n",i,acts[i]);
 		}
-		int idx;　//行動選択
+		int idx;//行動選択
 		do{
 			System.out.printf("0~%d>>",acts.length-1);
 			idx = new Scanner(System.in).nextInt();
@@ -121,7 +121,7 @@ public class Hero extends Character{
 		}
 	}
 
-	void magic(Character c){ //魔法選択
+	void magic(Character c){//魔法選択
 		for(int i=0;i<magics.length;i++){
 			System.out.printf("%d:%s  %s%n",i,magics[i],magicsinfo[i]);
 		}
@@ -135,8 +135,8 @@ public class Hero extends Character{
 			return;
 		}
 		System.out.printf("%sは%sの詠唱を開始した%n",this.name,this.magics[idx]);
-		this.magicNum=idx+1;　//どの魔法の詠唱を開始したかをセット
-		this.magicGage=this.magicGages[idx];　//魔法の詠唱必要値をセット
+		this.magicNum=idx+1;//どの魔法の詠唱を開始したかをセット
+		this.magicGage=this.magicGages[idx];//魔法の詠唱必要値をセット
 	}
 
 	//以下魔法リスト
